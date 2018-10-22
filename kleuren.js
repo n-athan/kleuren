@@ -2,25 +2,45 @@ let kleuren = {
     "rood": 0,
     "oranje": 30,
     "geel" : 60,
-    "appelgroen" : 90,
+    "gras" : 90,
     "groen": 120,
-    "turkooise" : 150,
+    "turkoois" : 150,
     "cyaan": 180,
-    "lichtblauw" : 210,
-    "donkerblauw" : 240,
+    "blauw" : 210,
+    "indigo" : 240,
     "paars": 270,
-    "roze" : 300,
-    "magenta": 330
+    "magenta" : 300,
+    "roze": 330
 }
 
 let mkl = "bcdfghjklmnpqrstvwxz"
 let klks = "aeiou"
-
-let mklCombi = ["bb", "bl", "br", "ch", "ck", "cl", "cr", "cs", "dd", "dh", "dj", "dl", "dr", "ff", "fl", "fr", "fs", "gg", "gl", "gr", "hl", "ht", "jl", "kk", "kl", "km", "kn", "kr", "lg", "ll", "ml", "mm", "mn", "mr", "nj", "nl", "nn", "ng", "nk", "nr", "ns", "pf", "ph", "pj", "pl", "pm", "pn", "pp", "pr", "ps", "ql", "qr", "rb", "rh", "rk", "rs", "rt", "sf", "sh", "sj", "sl", "sm", "sn", "sp", "sq", "sr", "ss", "st", "sw", "tb", "th", "tl", "tr", "ts", "tt", "tw", "vl", "vr", "vs", "vv", "wl", "wr", "ww", "xl", "xr", "xx", "zf", "zh", "zj", "zl", "zm", "zn", "zp", "zq", "zr", "zz", "zt", "zw"]
-
-
-
+let mklCombi = ["bb", "bl", "br", "ch", "ck", "cl", "cr", "cs", "dd", "dh", "dj", "dl", "dr", "ff", "fl", "fr", "fs", "gg", "gl", "gr", "hl", "ht", "jl", "kk", "kl", "km", "kn", "kr", "lg", "ll", "ml", "mm", "mn", "mr", "nj", "nl", "nn", "ng", "nk", "nr", "ns", "nt", "pf", "ph", "pj", "pl", "pm", "pn", "pp", "pr", "ps", "ql", "qr", "rb", "rh", "rk", "rs", "rt", "sf", "sh", "sj", "sl", "sm", "sn", "sp", "sq", "sr", "ss", "st", "sw", "tb", "th", "tl", "tr", "ts", "tt", "tw", "vl", "vr", "vs", "vv", "wl", "wr", "ww", "xl", "xr", "xx", "zf", "zh", "zj", "zl", "zm", "zn", "zp", "zq", "zr", "zz", "zt", "zw"]
 let kleur = Object.keys(kleuren);
+
+var lint = document.getElementsByClassName("lint")[0];
+var rect = lint.getBoundingClientRect();
+var scl, pos;
+// lint.addEventListener("mouseover", lintOver(e), false);
+
+function lintOver(e) {
+    const maxX = lint.offsetWidth;
+    const maxY = lint.offsetHeight;
+    console.log(maxY);
+    if (maxX >= 700) {
+        scl = 360/maxX;
+        pos = e.clientX - rect.left;
+    } else {
+        scl = 360/maxY;
+        pos = e.clientY - rect.top;        
+    }
+    let i = Math.floor(scl*pos);
+    let kn = kleurNaam(i);
+    const result = document.getElementsByClassName("result")[0];
+    let p = "<p style='color: hsl("+i+",50%,50%)'>"+i+" "+kn+"</p>"
+    result.innerHTML = p;
+}
+
 
 function kleurNaam (hue) {
     hue = hue % 360;
@@ -83,16 +103,15 @@ function makeRealWord(str,a,b,w) {
     return str
 }
 
+// function fill() {
+//     b = document.getElementsByTagName("body")[0];
+//     for (var i = 0; i < 361; i++) {
+//         let a = kleurNaam(i);
+//         let w = (i%30 == 0 )? "; font-weight: 700": "";
+//         let p = "<p style='color: hsl("+i+",50%,50%)"+w+"'>"+a+"</p>"
+//         b.insertAdjacentHTML('beforeend', p);
+//     }
+// }
 
-function fill() {
-    b = document.getElementsByTagName("body")[0];
-    for (var i = 0; i < 361; i++) {
-        let a = kleurNaam(i);
-        let w = (i%30 == 0 )? "; font-weight: 700": "";
-        let p = "<p style='color: hsl("+i+",50%,50%)"+w+"'>"+a+"</p>"
-        b.insertAdjacentHTML('beforeend', p);
-    }
-}
-
-fill();
+// fill();
 
