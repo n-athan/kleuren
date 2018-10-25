@@ -9,6 +9,7 @@ body {
     justify-content: center;
     background-color: hsl(21, 9%, 92%);
     width: 90vw;
+    height: auto;
     margin: auto;
     padding: 0;
     font-family: 'Space Mono', monospace;
@@ -50,12 +51,13 @@ p {
         align-items: flex-start;
         font-weight: 700;
         width: 50vw;
-        height: inherit;
+        height: 100%;
         padding: 0;
     }
 
     .lint > p {
         transform: none;
+        height: 50px;
     }
 
     .result {

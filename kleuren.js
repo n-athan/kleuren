@@ -20,19 +20,20 @@ let kleur = Object.keys(kleuren);
 
 var lint = document.getElementsByClassName("lint")[0];
 var rect = lint.getBoundingClientRect();
-var scl, pos;
-// lint.addEventListener("mouseover", lintOver(e), false);
+var scl, pos, t;
 
 function lintOver(e) {
     const maxX = lint.offsetWidth;
     const maxY = lint.offsetHeight;
-    console.log(maxY);
     if (maxX >= 700) {
         scl = 360/maxX;
         pos = e.clientX - rect.left;
     } else {
+        t = document.documentElement.scrollTop;
+        if (!t) {t = document.body.scrollTop};
         scl = 360/maxY;
-        pos = e.clientY - rect.top;        
+        pos = e.clientY + t;     
+        console.log(maxY, pos)   
     }
     let i = Math.floor(scl*pos);
     let kn = kleurNaam(i);
